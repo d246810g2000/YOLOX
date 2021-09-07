@@ -16,7 +16,7 @@ def get_annotations(xml_path, class_names):
         ymin = obj.find('ymin').text
         xmax = obj.find('xmax').text
         ymax = obj.find('ymax').text
-        annotations.append((int(xmin), int(ymin), int(xmax)-int(xmin), int(ymax)-int(ymin), int(class_names.index(cls))))
+        annotations.append((int(xmin), int(ymin), int(xmax)-int(xmin), int(ymax)-int(ymin), int(class_names.index(cls))+1))
     return annotations
 
 data_path = 'data/'
