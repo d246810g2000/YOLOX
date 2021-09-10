@@ -20,7 +20,7 @@ def get_annotations(xml_path, class_names):
     return annotations
 
 data_path = 'data/'
-output_dir = 'car_coco/'
+output_dir = 'taiwan_defect_v2/'
 jsons_path = os.path.join(output_dir, 'annotations/')
 train_imgs_path = os.path.join(output_dir, 'train2017/')
 val_imgs_path = os.path.join(output_dir, 'val2017/')
@@ -46,7 +46,6 @@ train_data = data.copy()
 val_data = data.copy()
 
 imgs_list = sorted([file for file in os.listdir(data_path) if file.split('.')[-1] == 'jpg'])
-xmls_list = sorted([file for file in os.listdir(data_path) if file.split('.')[-1] == 'xml'])
 random.shuffle(imgs_list)
 
 img_id = 1
@@ -56,10 +55,10 @@ train_imgs = []
 val_imgs = []
 train_anns = []
 val_anns = []
-for img, xml in zip(imgs_list, xmls_list):
+for img in imgs_list:
     img_path = os.path.join(data_path, img)
     w, h, _ = cv2.imread(img_path).shape
-    xml_path = os.path.join(data_path, xml)
+    xml_path = os.path.join(data_path, img.split('.')[0]+'.xml')
     if img_id/len(imgs_list) > train_test_split:
         out_img_path = os.path.join(train_imgs_path, img)
         shutil.copyfile(img_path, out_img_path)
